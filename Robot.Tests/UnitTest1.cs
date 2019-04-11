@@ -20,7 +20,7 @@ namespace Robot.Tests
             //MOVE
             //RIGHT
             //REPORT
-            //Output: 0,2,WEST
+            //Output: 0,2,EAST
 
             // Arrange
             var mockLogging = new Mock<ILogger<RobotAction>>();
