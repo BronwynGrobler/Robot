@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Robot.Handler
+namespace Robot.Service
 {
-    public interface IPlaceCommand 
+    public class PlaceService
     {
     }
 }

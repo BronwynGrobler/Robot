@@ -31,7 +31,7 @@ namespace Robot.Handler
                     break;
             }
 
-            if (X > 5 || X < 0 || Y > 5 || Y < 0)
+            if (Helper.Verify(X, Y))
             {
                 return Log(nameof(MoveCommand), "Robot will fall off the table!");
             }
