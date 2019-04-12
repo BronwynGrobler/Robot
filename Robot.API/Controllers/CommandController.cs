@@ -8,8 +8,14 @@ namespace Robot.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ValuesController : ControllerBase
+    public class CommandController : ControllerBase
     {
+
+        public CommandController()
+        {
+
+        }
+
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
