@@ -3,15 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.329
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Robot", "Robot\Robot.csproj", "{819A8CDE-0471-441E-AE11-5E6CE3F6E6BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Robot", "Robot\Robot.csproj", "{819A8CDE-0471-441E-AE11-5E6CE3F6E6BE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Robot.Handler", "Robot.Handler\Robot.Handler.csproj", "{4E03D5C3-350A-4862-BF7E-FBA2DD6D42C5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Robot.Handler", "Robot.Handler\Robot.Handler.csproj", "{4E03D5C3-350A-4862-BF7E-FBA2DD6D42C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Robot.Model", "Robot.Model\Robot.Model.csproj", "{46FDF535-6CF3-4849-8AE0-CBDB3B62AAD0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Robot.Model", "Robot.Model\Robot.Model.csproj", "{46FDF535-6CF3-4849-8AE0-CBDB3B62AAD0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Robot.Repository", "Robot.Repository\Robot.Repository.csproj", "{38DA82FB-0498-47E5-9643-F0CEB97E9242}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Robot.Repository", "Robot.Repository\Robot.Repository.csproj", "{38DA82FB-0498-47E5-9643-F0CEB97E9242}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Robot.Tests", "Robot.Tests\Robot.Tests.csproj", "{18446AD3-544F-40C2-8205-054AC5AF27A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Robot.Tests", "Robot.Tests\Robot.Tests.csproj", "{18446AD3-544F-40C2-8205-054AC5AF27A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Robot.Api", "Robot.Api\Robot.Api.csproj", "{D112957E-4312-4132-A707-971560F4C8CB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Robot.Service", "Robot.Service\Robot.Service.csproj", "{265CA6BE-2E10-4841-A6BA-ABBC60F88F98}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +43,14 @@ Global
 		{18446AD3-544F-40C2-8205-054AC5AF27A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{18446AD3-544F-40C2-8205-054AC5AF27A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{18446AD3-544F-40C2-8205-054AC5AF27A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D112957E-4312-4132-A707-971560F4C8CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D112957E-4312-4132-A707-971560F4C8CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D112957E-4312-4132-A707-971560F4C8CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D112957E-4312-4132-A707-971560F4C8CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{265CA6BE-2E10-4841-A6BA-ABBC60F88F98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{265CA6BE-2E10-4841-A6BA-ABBC60F88F98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{265CA6BE-2E10-4841-A6BA-ABBC60F88F98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{265CA6BE-2E10-4841-A6BA-ABBC60F88F98}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
