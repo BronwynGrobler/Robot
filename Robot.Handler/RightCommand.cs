@@ -15,9 +15,9 @@ namespace Robot.Handler
             this.coordinateRepository = coordinateRepository;
         }
 
-        public string Execute()
+        public string Execute(Coordinate coordinate, PositionSetting setting)
         {
-            this.coordinateRepository.Add(new Coordinate() { X = Coordinates.X, Y = Coordinates.Y, F = Settings.Right });
+            this.coordinateRepository.Add(new Coordinate() { X = coordinate.X, Y = coordinate.Y, F = setting.Right });
             return Log(nameof(RightCommand));
         }
     }

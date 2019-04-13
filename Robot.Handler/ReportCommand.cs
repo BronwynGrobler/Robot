@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Robot.Model;
+using Robot.Repository;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,9 +8,16 @@ namespace Robot.Handler
 {
     public class ReportCommand : CommandBase, IReportCommand
     {
-        public string Execute()
+        private readonly IRepository<Coordinate> coordinateRepository;
+
+        public ReportCommand(IRepository<Coordinate> coordinateRepository)
         {
-            return Log(nameof(ReportCommand), Coordinates.X + "," + Coordinates.Y + "," + Coordinates.F);
+            this.coordinateRepository = coordinateRepository;
+        }
+
+        public string Execute(Coordinate coordinate, PositionSetting setting)
+        {
+            return Log(nameof(ReportCommand), coordinate.X + "," + coordinate.Y + "," + coordinate.F);
         }
     }
 }

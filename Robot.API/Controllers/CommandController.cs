@@ -3,49 +3,55 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Robot.Handler;
+using Robot.Model;
+using Robot.Service;
 
 namespace Robot.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CommandController : ControllerBase
+    public class CommandController : Controller
     {
+        private readonly ICommandService commandService;
+        private readonly ILeftCommand leftCommand;
+        private readonly IRightCommand rightCommand;
+        private readonly IMoveCommand moveCommand;
 
-        public CommandController()
+        public CommandController(ICommandService commandService, ILeftCommand leftCommand, IRightCommand rightCommand, IMoveCommand moveCommand)
         {
-
+            this.commandService = commandService;
+            this.rightCommand = rightCommand;
+            this.leftCommand = leftCommand;
+            this.moveCommand = moveCommand;
         }
 
-        // GET api/values
-        [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        [ProducesResponseType(typeof(string), 200)]
+        [HttpPost("Left")]
+        public async Task<string> Left()
         {
-            return new string[] { "value1", "value2" };
+            return await this.commandService.Execute(leftCommand);
         }
 
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        [ProducesResponseType(typeof(string), 200)]
+        [HttpPost("Right")]
+        public async Task<string> Right()
         {
-            return "value";
+            return await this.commandService.Execute(rightCommand);
         }
 
-        // POST api/values
-        [HttpPost]
-        public void Post([FromBody] string value)
+        [ProducesResponseType(typeof(string), 200)]
+        [HttpPost("Move")]
+        public async Task<string> Move()
         {
+            return await this.commandService.Execute(moveCommand);
         }
 
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [ProducesResponseType(typeof(string), 200)]
+        [HttpPost("Place")]
+        public async Task<string> Place(int X, int Y, EDirection F)
         {
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            return await this.commandService.Place(X, Y, F);
         }
     }
 }

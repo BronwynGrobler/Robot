@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Robot.API</name>
+    </assembly>
+    <members>
+        <member name="F:Robot.API.Constants.Project.PROJECTNAME">
+            <summary>
+            The Project Name.
+            </summary>
+        </member>
+        <member name="F:Robot.API.Constants.Project.VERSIONNAME">
+            <summary>
+            The Version Name.
+            </summary>
+        </member>
+        <member name="F:Robot.API.Constants.Project.PROJECTDESCRIPTION">
+            <summary>
+            The Project Description.
+            </summary>
+        </member>
+    </members>
+</doc>

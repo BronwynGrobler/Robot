@@ -1,4 +1,5 @@
 ﻿using Robot.Model;
+using Robot.Repository;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,8 +9,7 @@ namespace Robot.Handler
     public class CommandBase
     {
         protected Coordinate Coordinates { get; set; }
-
-        protected PositionSetting Settings { get; set; }
+        protected PositionSetting Setting { get; set; }
 
         protected string Log(string command)
         {

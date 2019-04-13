@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Robot.Handler
 {
-    public interface IReportCommand : ICommand
+    public interface IReportCommand 
     {
     }
 }

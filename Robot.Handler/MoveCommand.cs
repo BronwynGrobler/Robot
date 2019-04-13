@@ -9,18 +9,19 @@ namespace Robot.Handler
     public class MoveCommand : CommandBase, IMoveCommand
     {
         private readonly IRepository<Coordinate> coordinateRepository;
+        
 
         public MoveCommand(IRepository<Coordinate> coordinateRepository)
         {
             this.coordinateRepository = coordinateRepository;
         }
 
-        public string Execute()
+        public string Execute(Coordinate coordinate, PositionSetting setting)
         {
-            var X = Coordinates.X;
-            var Y = Coordinates.Y;
+            var X = coordinate.X;
+            var Y = coordinate.Y;
 
-            switch (Settings.Coordinate)
+            switch (setting.Coordinate)
             {
                 case ECoordinate.X:
                     X = X + 1;
@@ -36,7 +37,7 @@ namespace Robot.Handler
                 return Log(nameof(MoveCommand), "Robot will fall off the table!");
             }
 
-            this.coordinateRepository.Add(new Coordinate() { X = X, Y = Y, F = Coordinates.F });
+            this.coordinateRepository.Add(new Coordinate() { X = X, Y = Y, F = coordinate.F });
             return Log(nameof(MoveCommand));
         }
     }
