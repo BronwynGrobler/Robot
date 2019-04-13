@@ -14,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Robot.Contract;
 using Robot.Handler;
 using Robot.Model;
 using Robot.Repository;
@@ -37,16 +38,15 @@ namespace Robot.API
             services
              .AddDbContext<RobotDbContext>(options => options.UseInMemoryDatabase(databaseName: "Robot"))
              .AddLogging(configure => configure.AddConsole().SetMinimumLevel(LogLevel.Warning))
-             .AddScoped<IRobotAction, RobotAction>()
              .AddScoped<IMoveCommand, MoveCommand>()
              .AddScoped<ILeftCommand, LeftCommand>()
              .AddScoped<IRightCommand, RightCommand>()
              .AddScoped<IPlaceCommand, PlaceCommand>()
+             .AddScoped<IReportCommand, ReportCommand>()
              .AddScoped<ICommandService, CommandService>()
              .AddScoped<IRepository<Coordinate>, Repository<Coordinate>>()
              .AddScoped<IRepository<ReportLog>, Repository<ReportLog>>()
              .AddScoped<IPositionSettingRepository, PositionSettingRepository>()
-             .AddScoped<IValidator, Validator>()
              .AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddSwaggerGen(

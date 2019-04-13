@@ -1,9 +1,7 @@
 ﻿using Robot.Model;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Robot.Handler
+namespace Robot.Contract
 {
     public interface ICommand
     {

@@ -1,4 +1,5 @@
-﻿using Robot.Model;
+﻿using Robot.Contract;
+using Robot.Model;
 using Robot.Repository;
 using System;
 using System.Collections.Generic;

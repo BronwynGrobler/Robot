@@ -8,9 +8,6 @@ namespace Robot.Handler
 {
     public class CommandBase
     {
-        protected Coordinate Coordinates { get; set; }
-        protected PositionSetting Setting { get; set; }
-
         protected string Log(string command)
         {
             return string.Format("{0} executed", command);

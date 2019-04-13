@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Robot.Contract\Robot.Contract.csproj" />
     <ProjectReference Include="..\Robot.Model\Robot.Model.csproj" />
     <ProjectReference Include="..\Robot.Repository\Robot.Repository.csproj" />
   </ItemGroup>

@@ -17,6 +17,7 @@
     <ProjectReference Include="..\Robot.Handler\Robot.Handler.csproj" />
     <ProjectReference Include="..\Robot.Model\Robot.Model.csproj" />
     <ProjectReference Include="..\Robot.Repository\Robot.Repository.csproj" />
+    <ProjectReference Include="..\Robot.Service\Robot.Service.csproj" />
   </ItemGroup>
 
 </Project>

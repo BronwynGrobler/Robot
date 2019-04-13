@@ -1,4 +1,5 @@
 ﻿
+using Robot.Contract;
 using Robot.Handler;
 using Robot.Model;
 using System.Threading.Tasks;

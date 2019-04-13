@@ -1,4 +1,5 @@
-﻿using Robot.Handler;
+﻿using Robot.Contract;
+using Robot.Handler;
 using Robot.Model;
 using Robot.Repository;
 using System;

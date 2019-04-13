@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Robot.Contract;
 using Robot.Handler;
 using Robot.Model;
 using Robot.Service;
@@ -17,13 +18,15 @@ namespace Robot.API.Controllers
         private readonly ILeftCommand leftCommand;
         private readonly IRightCommand rightCommand;
         private readonly IMoveCommand moveCommand;
+        private readonly IReportCommand reportCommand;
 
-        public CommandController(ICommandService commandService, ILeftCommand leftCommand, IRightCommand rightCommand, IMoveCommand moveCommand)
+        public CommandController(ICommandService commandService, ILeftCommand leftCommand, IRightCommand rightCommand, IMoveCommand moveCommand, IReportCommand reportCommand)
         {
             this.commandService = commandService;
             this.rightCommand = rightCommand;
             this.leftCommand = leftCommand;
             this.moveCommand = moveCommand;
+            this.reportCommand = reportCommand;
         }
 
         [ProducesResponseType(typeof(string), 200)]
@@ -45,6 +48,13 @@ namespace Robot.API.Controllers
         public async Task<string> Move()
         {
             return await this.commandService.Execute(moveCommand);
+        }
+
+        [ProducesResponseType(typeof(string), 200)]
+        [HttpPost("Report")]
+        public async Task<string> Report()
+        {
+            return await this.commandService.Execute(reportCommand);
         }
 
         [ProducesResponseType(typeof(string), 200)]

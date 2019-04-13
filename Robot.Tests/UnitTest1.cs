@@ -1,8 +1,10 @@
 using Microsoft.Extensions.Logging;
 using Moq;
+using Robot.Contract;
 using Robot.Handler;
 using Robot.Model;
 using Robot.Repository;
+using Robot.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,26 +25,25 @@ namespace Robot.Tests
             //Output: 0,2,EAST
 
             // Arrange
-            var mockLogging = new Mock<ILogger<RobotAction>>();
+           // var mockLogging = new Mock<ILogger<RobotAction>>();
             var mockCoordinateRepo = new Mock<DummyDb<Coordinate>>();
             var mockReportRepo = new Mock<DummyDb<ReportLog>>();
             var mockPositionRepo = new Mock<IPositionSettingRepository>();
-            var mockValidator = new Mock<IValidator>();
 
             mockPositionRepo.Setup(x => x.Setting(EDirection.NORTH)).Returns(new PositionSetting() { Id = 1, Facing = EDirection.NORTH, Left = EDirection.WEST, Right = EDirection.EAST, Coordinate = ECoordinate.Y });
             mockPositionRepo.Setup(x => x.Setting(EDirection.SOUTH)).Returns(new PositionSetting() { Id = 2, Facing = EDirection.SOUTH, Left = EDirection.EAST, Right = EDirection.WEST, Coordinate = ECoordinate.Y });
             mockPositionRepo.Setup(x => x.Setting(EDirection.EAST)).Returns(new PositionSetting() { Id = 3, Facing = EDirection.EAST, Left = EDirection.NORTH, Right = EDirection.SOUTH, Coordinate = ECoordinate.X });
             mockPositionRepo.Setup(x => x.Setting(EDirection.WEST)).Returns(new PositionSetting() { Id = 4, Facing = EDirection.WEST, Left = EDirection.SOUTH, Right = EDirection.NORTH, Coordinate = ECoordinate.X });
 
-            mockValidator.Setup(x => x.IsValid(new string[] { ECommand.PLACE.ToString(), "0", "0", EDirection.NORTH.ToString() })).Returns(new string[] { ECommand.PLACE.ToString(), "0", "0", EDirection.NORTH.ToString() });
+           // mockValidator.Setup(x => x.IsValid(new string[] { ECommand.PLACE.ToString(), "0", "0", EDirection.NORTH.ToString() })).Returns(new string[] { ECommand.PLACE.ToString(), "0", "0", EDirection.NORTH.ToString() });
 
             // Act
-            var main = new RobotAction(mockLogging.Object, mockCoordinateRepo.Object, mockReportRepo.Object, mockPositionRepo.Object, mockValidator.Object);
-            main.Execute(new string[] { ECommand.PLACE.ToString(), "0", "0", EDirection.NORTH.ToString() });
-            main.Execute(new string[] { ECommand.MOVE.ToString() });
-            main.Execute(new string[] { ECommand.MOVE.ToString() });
-            main.Execute(new string[] { ECommand.RIGHT.ToString() });
-            main.Execute(new string[] { ECommand.REPORT.ToString() });
+           // var main = new RobotAction(mockLogging.Object, mockCoordinateRepo.Object, mockReportRepo.Object, mockPositionRepo.Object, mockValidator.Object);
+           // main.Execute(new string[] { ECommand.PLACE.ToString(), "0", "0", EDirection.NORTH.ToString() });
+           // main.Execute(new string[] { ECommand.MOVE.ToString() });
+           // main.Execute(new string[] { ECommand.MOVE.ToString() });
+          //  main.Execute(new string[] { ECommand.RIGHT.ToString() });
+           // main.Execute(new string[] { ECommand.REPORT.ToString() });
 
             // Assert
             Assert.Equal("0,2,EAST", mockReportRepo.Object.Last().Message);
@@ -58,24 +59,23 @@ namespace Robot.Tests
             //Output: 0,0,WEST
 
             // Arrange
-            var mockLogging = new Mock<ILogger<RobotAction>>();
+           // var mockLogging = new Mock<ILogger<RobotAction>>();
             var mockCoordinateRepo = new Mock<DummyDb<Coordinate>>();
             var mockReportRepo = new Mock<DummyDb<ReportLog>>();
             var mockPositionRepo = new Mock<IPositionSettingRepository>();
-            var mockValidator = new Mock<IValidator>();
 
             mockPositionRepo.Setup(x => x.Setting(EDirection.NORTH)).Returns(new PositionSetting() { Id = 1, Facing = EDirection.NORTH, Left = EDirection.WEST, Right = EDirection.EAST, Coordinate = ECoordinate.Y });
             mockPositionRepo.Setup(x => x.Setting(EDirection.SOUTH)).Returns(new PositionSetting() { Id = 2, Facing = EDirection.SOUTH, Left = EDirection.EAST, Right = EDirection.WEST, Coordinate = ECoordinate.Y });
             mockPositionRepo.Setup(x => x.Setting(EDirection.EAST)).Returns(new PositionSetting() { Id = 3, Facing = EDirection.EAST, Left = EDirection.NORTH, Right = EDirection.SOUTH, Coordinate = ECoordinate.X });
             mockPositionRepo.Setup(x => x.Setting(EDirection.WEST)).Returns(new PositionSetting() { Id = 4, Facing = EDirection.WEST, Left = EDirection.SOUTH, Right = EDirection.NORTH, Coordinate = ECoordinate.X });
 
-            mockValidator.Setup(x => x.IsValid(new string[] { ECommand.PLACE.ToString(), "0", "0", EDirection.NORTH.ToString() })).Returns(new string[] { ECommand.PLACE.ToString(), "0", "0", EDirection.NORTH.ToString() });
+         //   mockValidator.Setup(x => x.IsValid(new string[] { ECommand.PLACE.ToString(), "0", "0", EDirection.NORTH.ToString() })).Returns(new string[] { ECommand.PLACE.ToString(), "0", "0", EDirection.NORTH.ToString() });
 
             // Act
-            var main = new RobotAction(mockLogging.Object, mockCoordinateRepo.Object, mockReportRepo.Object, mockPositionRepo.Object, mockValidator.Object);
-            main.Execute(new string[] { ECommand.PLACE.ToString(), "0", "0", EDirection.NORTH.ToString() });
-            main.Execute(new string[] { ECommand.LEFT.ToString() });
-            main.Execute(new string[] { ECommand.REPORT.ToString() });
+            //var main = new RobotAction(mockLogging.Object, mockCoordinateRepo.Object, mockReportRepo.Object, mockPositionRepo.Object, mockValidator.Object);
+           // main.Execute(new string[] { ECommand.PLACE.ToString(), "0", "0", EDirection.NORTH.ToString() });
+           // main.Execute(new string[] { ECommand.LEFT.ToString() });
+//main.Execute(new string[] { ECommand.REPORT.ToString() });
 
             // Assert
             Assert.Equal("0,0,WEST", mockReportRepo.Object.Last().Message);
@@ -94,28 +94,28 @@ namespace Robot.Tests
             //Output: 3,3,NORTH
 
             // Arrange
-            var mockLogging = new Mock<ILogger<RobotAction>>();
+            var mockLogging = new Mock<ILogger<CommandService>>();
             var mockCoordinateRepo = new Mock<DummyDb<Coordinate>>();
             var mockReportRepo = new Mock<DummyDb<ReportLog>>();
             var mockPositionRepo = new Mock<IPositionSettingRepository>();
-            var mockValidator = new Mock<IValidator>();
+            var mockPlace = new Mock<IPlaceCommand>();
 
             mockPositionRepo.Setup(x => x.Setting(EDirection.NORTH)).Returns(new PositionSetting() { Id = 1, Facing = EDirection.NORTH, Left = EDirection.WEST, Right = EDirection.EAST, Coordinate = ECoordinate.Y });
             mockPositionRepo.Setup(x => x.Setting(EDirection.SOUTH)).Returns(new PositionSetting() { Id = 2, Facing = EDirection.SOUTH, Left = EDirection.EAST, Right = EDirection.WEST, Coordinate = ECoordinate.Y });
             mockPositionRepo.Setup(x => x.Setting(EDirection.EAST)).Returns(new PositionSetting() { Id = 3, Facing = EDirection.EAST, Left = EDirection.NORTH, Right = EDirection.SOUTH, Coordinate = ECoordinate.X });
             mockPositionRepo.Setup(x => x.Setting(EDirection.WEST)).Returns(new PositionSetting() { Id = 4, Facing = EDirection.WEST, Left = EDirection.SOUTH, Right = EDirection.NORTH, Coordinate = ECoordinate.X });
 
-            mockValidator.Setup(x => x.IsValid(new string[] { ECommand.PLACE.ToString(), "1", "2", EDirection.EAST.ToString() })).Returns(new string[] { ECommand.PLACE.ToString(), "1", "2", EDirection.EAST.ToString() });
+           // mockValidator.Setup(x => x.IsValid(new string[] { ECommand.PLACE.ToString(), "1", "2", EDirection.EAST.ToString() })).Returns(new string[] { ECommand.PLACE.ToString(), "1", "2", EDirection.EAST.ToString() });
 
             // Act
-            var main = new RobotAction(mockLogging.Object, mockCoordinateRepo.Object, mockReportRepo.Object, mockPositionRepo.Object, mockValidator.Object);
-            main.Execute(new string[] { ECommand.PLACE.ToString(), "1", "2", EDirection.EAST.ToString() });
-            main.Execute(new string[] { ECommand.MOVE.ToString() });
-            main.Execute(new string[] { ECommand.MOVE.ToString() });
-            main.Execute(new string[] { ECommand.MOVE.ToString() });
-            main.Execute(new string[] { ECommand.LEFT.ToString() });
-            main.Execute(new string[] { ECommand.MOVE.ToString() });
-            main.Execute(new string[] { ECommand.REPORT.ToString() });
+            //var main = new CommandService(mockCoordinateRepo.Object, mockReportRepo.Object, mockPositionRepo.Object, mockPlace.Object);
+            //main.Execute(new string[] { ECommand.PLACE.ToString(), "1", "2", EDirection.EAST.ToString() });
+            //main.Execute(new string[] { ECommand.MOVE.ToString() });
+            //main.Execute(new string[] { ECommand.MOVE.ToString() });
+           // main.Execute(new string[] { ECommand.MOVE.ToString() });
+           // main.Execute(new string[] { ECommand.LEFT.ToString() });
+           // main.Execute(new string[] { ECommand.MOVE.ToString() });
+           // main.Execute(new string[] { ECommand.REPORT.ToString() });
 
             // Assert
             Assert.Equal("4,3,NORTH", mockReportRepo.Object.Last().Message);

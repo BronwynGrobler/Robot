@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Robot.Handler
+namespace Robot.Contract
 {
-    public interface ILeftCommand : ICommand
+    public interface IMoveCommand : ICommand
     {
     }
 }
