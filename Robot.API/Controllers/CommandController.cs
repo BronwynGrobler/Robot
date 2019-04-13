@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EnsureThat;
 using Microsoft.AspNetCore.Mvc;
 using Robot.Contract;
 using Robot.Handler;
@@ -57,8 +58,16 @@ namespace Robot.API.Controllers
             return await this.commandService.Execute(reportCommand);
         }
 
+
+        /// <summary>
+        /// Please note if no value is entered, the default values of 0,0,NORTH will be received
+        /// </summary>
+        /// <param name="X"></param>
+        /// <param name="Y"></param>
+        /// <param name="F"></param>
+        /// <returns></returns>
         [ProducesResponseType(typeof(string), 200)]
-        [HttpPost("Place")]
+        [HttpPost("Place")]        
         public async Task<string> Place(int X, int Y, EDirection F)
         {
             return await this.commandService.Place(X, Y, F);

@@ -18,7 +18,12 @@ namespace Robot.Handler
 
         public string Execute(Coordinate coordinate, PositionSetting setting)
         {
-            return Log(nameof(ReportCommand), coordinate.X + "," + coordinate.Y + "," + coordinate.F);
+            return Log(coordinate.X + "," + coordinate.Y + "," + coordinate.F);
+        }
+
+        protected override string Log(string message)
+        {
+            return message;
         }
     }
 }

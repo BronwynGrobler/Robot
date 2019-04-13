@@ -16,7 +16,7 @@ namespace Robot.Tests
     public class ActionTest
     {
         [Fact]
-        public async Task Test1_SuccessAsync()
+        public void Test1_SuccessAsync()
         {
             //PLACE 0,0,NORTH
             //MOVE
@@ -37,14 +37,14 @@ namespace Robot.Tests
 
             // Act
             var main = new CommandService(mockCoordinateRepo, mockPositionRepo.Object, mockPlaceCommand);
-            await main.Place(0, 0, EDirection.NORTH);
-            await main.Execute(new MoveCommand(mockCoordinateRepo));
-            await main.Execute(new MoveCommand(mockCoordinateRepo));
-            await main.Execute(new RightCommand(mockCoordinateRepo));
-            var result = await main.Execute(new ReportCommand(mockCoordinateRepo));
+            main.Place(0, 0, EDirection.NORTH);
+            main.Execute(new MoveCommand(mockCoordinateRepo));
+            main.Execute(new MoveCommand(mockCoordinateRepo));
+            main.Execute(new RightCommand(mockCoordinateRepo));
+            var result = main.Execute(new ReportCommand(mockCoordinateRepo));
 
             // Assert
-            Assert.Equal("0,2,EAST", result);
+            Assert.Equal("0,2,EAST", result.Result);
         }
 
         [Fact]

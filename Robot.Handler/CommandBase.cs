@@ -6,14 +6,14 @@ using System.Text;
 
 namespace Robot.Handler
 {
-    public class CommandBase
+    public abstract class CommandBase
     {
-        protected string Log(string command)
+        protected virtual string Log(string command)
         {
             return string.Format("{0} executed", command);
         }
 
-        protected string Log(string command, string message)
+        protected virtual string Log(string command, string message)
         {
             return string.Format("{0} executed. {1}", command, message);
         }

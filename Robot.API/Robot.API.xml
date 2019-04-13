@@ -19,5 +19,14 @@
             The Project Description.
             </summary>
         </member>
+        <member name="M:Robot.API.Controllers.CommandController.Place(System.Int32,System.Int32,Robot.Model.EDirection)">
+            <summary>
+            Please note if no value is entered, the default values of 0,0,NORTH will be received
+            </summary>
+            <param name="X"></param>
+            <param name="Y"></param>
+            <param name="F"></param>
+            <returns></returns>
+        </member>
     </members>
 </doc>
