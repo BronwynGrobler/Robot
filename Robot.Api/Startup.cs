@@ -58,7 +58,6 @@ namespace Robot.API
 
                     var fileName = this.GetType().GetTypeInfo().Module.Name.Replace(".dll", ".xml").Replace(".exe", ".xml");
                     c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, fileName));
-                    //c.OperationFilter<ExamplesOperationFilter>();
                     c.DescribeAllEnumsAsStrings();
                 });
             
@@ -80,14 +79,11 @@ namespace Robot.API
 
             app.UseAuthentication();
 
-            //app.UseMiddleware(typeof(ErrorHandlingMiddleware));
-            //app.UseMiddleware(typeof(AppKeyAuthorisationMiddleware));
             app.UseMvc();
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint($"{Constants.Project.VERSIONNAME}/swagger.json", $"{Constants.Project.PROJECTNAME} {Constants.Project.VERSIONNAME}");
-                //c.OAuthClientId(Configuration["SwaggerClientId"]);
             });
 
             using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>()
