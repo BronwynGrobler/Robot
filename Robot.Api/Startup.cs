@@ -89,7 +89,7 @@ namespace Robot.API
             using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>()
              .CreateScope())
             {
-                serviceScope.ServiceProvider.GetService<RobotDbContext>().Database.EnsureCreated();
+                serviceScope.ServiceProvider.GetService<RobotDbContext>().Database.EnsureCreated(); 
             }
         }
     }
