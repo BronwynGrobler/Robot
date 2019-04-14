@@ -2,11 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Robot.Repository
 {
     public interface IPositionSettingRepository
     {
-        PositionSetting Setting(EDirection facing);
+        Task<PositionSetting> Setting(EDirection facing);
     }
 }

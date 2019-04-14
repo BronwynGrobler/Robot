@@ -16,67 +16,69 @@ namespace Robot.Tests
     public class ActionTest
     {
         [Fact]
-        public void Test1_SuccessAsync()
+        public async Task Test1_success()
         {
-            //PLACE 0,0,NORTH
-            //MOVE
-            //MOVE
-            //RIGHT
-            //REPORT
-            //Output: 0,2,EAST
+            //place 0,0,north
+            //move
+            //move
+            //right
+            //report
+            //output: 0,2,east
 
-            // Arrange
+            // arrange
             var mockCoordinateRepo = new DummyDb<Coordinate>();
             var mockPlaceCommand = new PlaceCommand(mockCoordinateRepo);
             var mockPositionRepo = new Mock<IPositionSettingRepository>();
-            
-            mockPositionRepo.Setup(x => x.Setting(EDirection.NORTH)).Returns(new PositionSetting() { Id = 1, Facing = EDirection.NORTH, Left = EDirection.WEST, Right = EDirection.EAST, Coordinate = ECoordinate.Y });
-            mockPositionRepo.Setup(x => x.Setting(EDirection.SOUTH)).Returns(new PositionSetting() { Id = 2, Facing = EDirection.SOUTH, Left = EDirection.EAST, Right = EDirection.WEST, Coordinate = ECoordinate.Y });
-            mockPositionRepo.Setup(x => x.Setting(EDirection.EAST)).Returns(new PositionSetting() { Id = 3, Facing = EDirection.EAST, Left = EDirection.NORTH, Right = EDirection.SOUTH, Coordinate = ECoordinate.X });
-            mockPositionRepo.Setup(x => x.Setting(EDirection.WEST)).Returns(new PositionSetting() { Id = 4, Facing = EDirection.WEST, Left = EDirection.SOUTH, Right = EDirection.NORTH, Coordinate = ECoordinate.X });
 
-            // Act
+            mockPositionRepo.Setup(x => x.Setting(EDirection.NORTH)).ReturnsAsync(new PositionSetting() { Id = 1, Facing = EDirection.NORTH, Left = EDirection.WEST, Right = EDirection.EAST, Coordinate = ECoordinate.Y });
+            mockPositionRepo.Setup(x => x.Setting(EDirection.SOUTH)).ReturnsAsync(new PositionSetting() { Id = 2, Facing = EDirection.SOUTH, Left = EDirection.EAST, Right = EDirection.WEST, Coordinate = ECoordinate.Y });
+            mockPositionRepo.Setup(x => x.Setting(EDirection.EAST)).ReturnsAsync(new PositionSetting() { Id = 3, Facing = EDirection.EAST, Left = EDirection.NORTH, Right = EDirection.SOUTH, Coordinate = ECoordinate.X });
+            mockPositionRepo.Setup(x => x.Setting(EDirection.WEST)).ReturnsAsync(new PositionSetting() { Id = 4, Facing = EDirection.WEST, Left = EDirection.SOUTH, Right = EDirection.NORTH, Coordinate = ECoordinate.X });
+
+            // act
             var main = new CommandService(mockCoordinateRepo, mockPositionRepo.Object, mockPlaceCommand);
-            main.Place(0, 0, EDirection.NORTH);
-            main.Execute(new MoveCommand(mockCoordinateRepo));
-            main.Execute(new MoveCommand(mockCoordinateRepo));
-            main.Execute(new RightCommand(mockCoordinateRepo));
+
+            await main.Place(0, 0, EDirection.NORTH);
+            await main.Execute(new MoveCommand(mockCoordinateRepo));
+            await main.Execute(new MoveCommand(mockCoordinateRepo));
+            await main.Execute(new RightCommand(mockCoordinateRepo));
             var result = main.Execute(new ReportCommand(mockCoordinateRepo));
 
-            // Assert
+            // assert
             Assert.Equal("0,2,EAST", result.Result);
         }
 
         [Fact]
-        public async Task Test2_SuccessAsync()
+        public async Task Test2_success()
         {
-            //PLACE 0,0,NORTH
-            //LEFT
-            //REPORT
-            //Output: 0,0,WEST
+            //place 0,0,north
+            //left
+            //report
+            //output: 0,0,west
 
-            // Arrange
+            // arrange
             var mockCoordinateRepo = new DummyDb<Coordinate>();
             var mockPlaceCommand = new PlaceCommand(mockCoordinateRepo);
             var mockPositionRepo = new Mock<IPositionSettingRepository>();
 
-            mockPositionRepo.Setup(x => x.Setting(EDirection.NORTH)).Returns(new PositionSetting() { Id = 1, Facing = EDirection.NORTH, Left = EDirection.WEST, Right = EDirection.EAST, Coordinate = ECoordinate.Y });
-            mockPositionRepo.Setup(x => x.Setting(EDirection.SOUTH)).Returns(new PositionSetting() { Id = 2, Facing = EDirection.SOUTH, Left = EDirection.EAST, Right = EDirection.WEST, Coordinate = ECoordinate.Y });
-            mockPositionRepo.Setup(x => x.Setting(EDirection.EAST)).Returns(new PositionSetting() { Id = 3, Facing = EDirection.EAST, Left = EDirection.NORTH, Right = EDirection.SOUTH, Coordinate = ECoordinate.X });
-            mockPositionRepo.Setup(x => x.Setting(EDirection.WEST)).Returns(new PositionSetting() { Id = 4, Facing = EDirection.WEST, Left = EDirection.SOUTH, Right = EDirection.NORTH, Coordinate = ECoordinate.X });
+            mockPositionRepo.Setup(x => x.Setting(EDirection.NORTH)).ReturnsAsync(new PositionSetting() { Id = 1, Facing = EDirection.NORTH, Left = EDirection.WEST, Right = EDirection.EAST, Coordinate = ECoordinate.Y });
+            mockPositionRepo.Setup(x => x.Setting(EDirection.SOUTH)).ReturnsAsync(new PositionSetting() { Id = 2, Facing = EDirection.SOUTH, Left = EDirection.EAST, Right = EDirection.WEST, Coordinate = ECoordinate.Y });
+            mockPositionRepo.Setup(x => x.Setting(EDirection.EAST)).ReturnsAsync(new PositionSetting() { Id = 3, Facing = EDirection.EAST, Left = EDirection.NORTH, Right = EDirection.SOUTH, Coordinate = ECoordinate.X });
+            mockPositionRepo.Setup(x => x.Setting(EDirection.WEST)).ReturnsAsync(new PositionSetting() { Id = 4, Facing = EDirection.WEST, Left = EDirection.SOUTH, Right = EDirection.NORTH, Coordinate = ECoordinate.X });
 
-            // Act
+            // act
             var main = new CommandService(mockCoordinateRepo, mockPositionRepo.Object, mockPlaceCommand);
+
             await main.Place(0, 0, EDirection.NORTH);
             await main.Execute(new LeftCommand(mockCoordinateRepo));
-            var result = await main.Execute(new ReportCommand(mockCoordinateRepo));
+            var result = main.Execute(new ReportCommand(mockCoordinateRepo));
 
-            // Assert
-            Assert.Equal("0,0,WEST", result);
+            // assert
+            Assert.Equal("0,0,WEST", result.Result);
         }
 
         [Fact]
-        public async Task Test3_SuccessAsync()
+        public async Task Test3_success()
         {
             //PLACE 1,2,EAST
             //MOVE
@@ -85,48 +87,56 @@ namespace Robot.Tests
             //LEFT
             //MOVE
             //REPORT
-            //Output: 3,3,NORTH
+            //Output: 4,3,NORTH
 
-            // Arrange
+            // arrange
             var mockCoordinateRepo = new DummyDb<Coordinate>();
             var mockPlaceCommand = new PlaceCommand(mockCoordinateRepo);
             var mockPositionRepo = new Mock<IPositionSettingRepository>();
 
-            mockPositionRepo.Setup(x => x.Setting(EDirection.NORTH)).Returns(new PositionSetting() { Id = 1, Facing = EDirection.NORTH, Left = EDirection.WEST, Right = EDirection.EAST, Coordinate = ECoordinate.Y });
-            mockPositionRepo.Setup(x => x.Setting(EDirection.SOUTH)).Returns(new PositionSetting() { Id = 2, Facing = EDirection.SOUTH, Left = EDirection.EAST, Right = EDirection.WEST, Coordinate = ECoordinate.Y });
-            mockPositionRepo.Setup(x => x.Setting(EDirection.EAST)).Returns(new PositionSetting() { Id = 3, Facing = EDirection.EAST, Left = EDirection.NORTH, Right = EDirection.SOUTH, Coordinate = ECoordinate.X });
-            mockPositionRepo.Setup(x => x.Setting(EDirection.WEST)).Returns(new PositionSetting() { Id = 4, Facing = EDirection.WEST, Left = EDirection.SOUTH, Right = EDirection.NORTH, Coordinate = ECoordinate.X });
+            mockPositionRepo.Setup(x => x.Setting(EDirection.NORTH)).ReturnsAsync(new PositionSetting() { Id = 1, Facing = EDirection.NORTH, Left = EDirection.WEST, Right = EDirection.EAST, Coordinate = ECoordinate.Y });
+            mockPositionRepo.Setup(x => x.Setting(EDirection.SOUTH)).ReturnsAsync(new PositionSetting() { Id = 2, Facing = EDirection.SOUTH, Left = EDirection.EAST, Right = EDirection.WEST, Coordinate = ECoordinate.Y });
+            mockPositionRepo.Setup(x => x.Setting(EDirection.EAST)).ReturnsAsync(new PositionSetting() { Id = 3, Facing = EDirection.EAST, Left = EDirection.NORTH, Right = EDirection.SOUTH, Coordinate = ECoordinate.X });
+            mockPositionRepo.Setup(x => x.Setting(EDirection.WEST)).ReturnsAsync(new PositionSetting() { Id = 4, Facing = EDirection.WEST, Left = EDirection.SOUTH, Right = EDirection.NORTH, Coordinate = ECoordinate.X });
 
-            // Act
+            // act
             var main = new CommandService(mockCoordinateRepo, mockPositionRepo.Object, mockPlaceCommand);
+
             await main.Place(1, 2, EDirection.EAST);
             await main.Execute(new MoveCommand(mockCoordinateRepo));
             await main.Execute(new MoveCommand(mockCoordinateRepo));
             await main.Execute(new MoveCommand(mockCoordinateRepo));
             await main.Execute(new LeftCommand(mockCoordinateRepo));
             await main.Execute(new MoveCommand(mockCoordinateRepo));
-            var result = await main.Execute(new ReportCommand(mockCoordinateRepo));
+            var result = main.Execute(new ReportCommand(mockCoordinateRepo));
 
-            // Assert
-            Assert.Equal("4,3,NORTH", result);
-        }
-    }
-
-    // Example of mocking up your own repository for testing
-    public class DummyDb<T> : IRepository<T>
-        where T : Entity
-    {
-
-        private IList<T> holder = new List<T>();
-
-        public void Add(T entity)
-        {
-            holder.Add(entity);
+            // assert
+            Assert.Equal("4,3,NORTH", result.Result);
         }
 
-        public T Last()
+
+        // Example of mocking up your own repository for testing
+        public class DummyDb<T> : IRepository<T>
+            where T : Entity
         {
-            return holder.ToList().OrderBy(h => h.Id).LastOrDefault();
+
+            private IList<T> holder = new List<T>();
+
+            public async Task Add(T entity)
+            {
+                await Task.Run(() =>
+                {
+                    holder.Add(entity);
+                });                
+            }
+
+            public async Task<T> Last()
+            {
+                return await Task.Run(() =>
+                {
+                    return holder.ToList().OrderBy(h => h.Id).LastOrDefault();
+                });
+            }
         }
     }
 }

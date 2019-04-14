@@ -2,11 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Robot.Contract
 {
     public interface IPlaceCommand 
     {
-        string Execute(int X, int Y, EDirection F);
+        Task<string> Execute(int X, int Y, EDirection F);
     };
 }

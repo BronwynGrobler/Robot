@@ -1,8 +1,10 @@
-﻿using Robot.Model;
+﻿using Microsoft.EntityFrameworkCore;
+using Robot.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Robot.Repository
 {
@@ -15,9 +17,9 @@ namespace Robot.Repository
             this.context = context;
         }
 
-        public PositionSetting Setting(EDirection facing)
+        public async Task<PositionSetting> Setting(EDirection facing)
         {
-            return this.context.Directions.Where(d => d.Facing == facing).FirstOrDefault();
+            return await this.context.Directions.Where(d => d.Facing == facing).FirstOrDefaultAsync();
         }
     }
 }

@@ -1,10 +1,11 @@
 ﻿using Robot.Model;
 using System;
+using System.Threading.Tasks;
 
 namespace Robot.Contract
 {
     public interface ICommand
     {
-        string Execute(Coordinate coordinate, PositionSetting setting);
+        Task<String> Execute(Coordinate coordinate, PositionSetting setting);
     }
 }

@@ -1,8 +1,7 @@
-﻿using Robot.Model;
-using System;
-using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore;
+using Robot.Model;
 using System.Linq;
-using System.Text;
+using System.Threading.Tasks;
 
 namespace Robot.Repository
 {
@@ -17,15 +16,15 @@ namespace Robot.Repository
         }
 
         // An upsert could have been used, but in case auditing is needed in the future
-        public void Add(T entity)
+        public async Task Add(T entity)
         {
-            this.context.Add<T>(entity);
-            this.context.SaveChanges();
+            await this.context.AddAsync<T>(entity);
+            await this.context.SaveChangesAsync();
         }
 
-        public T Last()
+        public async Task<T> Last()
         {
-            return this.context.Set<T>().OrderBy(i => i.Id).LastOrDefault();
+            return await this.context.Set<T>().OrderBy(i => i.Id).LastOrDefaultAsync();
         }
     }
 }

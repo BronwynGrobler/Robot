@@ -4,6 +4,7 @@ using Robot.Repository;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Robot.Handler
 {
@@ -16,9 +17,9 @@ namespace Robot.Handler
             this.coordinateRepository = coordinateRepository;
         }
 
-        public string Execute(Coordinate coordinate, PositionSetting setting)
+        public async Task<string> Execute(Coordinate coordinate, PositionSetting setting)
         {
-            this.coordinateRepository.Add(new Coordinate() { X = coordinate.X, Y = coordinate.Y, F = setting.Right });
+            await this.coordinateRepository.Add(new Coordinate() { X = coordinate.X, Y = coordinate.Y, F = setting.Right });
             return Log(nameof(RightCommand));
         }
     }

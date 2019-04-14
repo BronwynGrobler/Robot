@@ -4,6 +4,7 @@ using Robot.Repository;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Robot.Handler
 {
@@ -17,7 +18,7 @@ namespace Robot.Handler
             this.coordinateRepository = coordinateRepository;
         }
 
-        public string Execute(Coordinate coordinate, PositionSetting setting)
+        public async Task<string> Execute(Coordinate coordinate, PositionSetting setting)
         {
             var X = coordinate.X;
             var Y = coordinate.Y;
@@ -38,7 +39,7 @@ namespace Robot.Handler
                 return Log(nameof(MoveCommand), "Robot will fall off the table!");
             }
 
-            this.coordinateRepository.Add(new Coordinate() { X = X, Y = Y, F = coordinate.F });
+            await this.coordinateRepository.Add(new Coordinate() { X = X, Y = Y, F = coordinate.F });
             return Log(nameof(MoveCommand));
         }
     }

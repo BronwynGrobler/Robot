@@ -23,25 +23,19 @@ namespace Robot.Service
 
         public async Task<string> Execute(ICommand command)
         {
-            var coordinates = this.coordinateRepository.Last();
+            var coordinates = await this.coordinateRepository.Last();
 
             if (coordinates == null)
             {
                 return ("Please make a placement first.");
             }
-
-            return await Task.Run(() =>
-            {
-                return command.Execute(coordinates, this.settingRepository.Setting(coordinates.F));
-            });
+            var settings = await this.settingRepository.Setting(coordinates.F);
+            return await command.Execute(coordinates, settings);
         }
 
         public async Task<string> Place(int X, int Y, EDirection F)
         {
-            return await Task.Run(() =>
-            {
-                return this.placeCommand.Execute(X, Y, F);
-            });
+             return await this.placeCommand.Execute(X, Y, F);
         }
     }
 }
