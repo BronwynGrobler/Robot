@@ -17,12 +17,9 @@ namespace Robot.Handler
             this.coordinateRepository = coordinateRepository;
         }
 
-        public async Task<string> Execute(Coordinate coordinate, PositionSetting setting)
+        public async Task<string> ExecuteAsync(Coordinate coordinate, PositionSetting setting)
         {
-            return await Task.Run(() =>
-            {
-                return Log(coordinate.X + "," + coordinate.Y + "," + coordinate.F);
-            });
+            return Log(coordinate.X + "," + coordinate.Y + "," + coordinate.F);
         }
 
         protected override string Log(string message)

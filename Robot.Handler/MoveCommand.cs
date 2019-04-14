@@ -18,7 +18,7 @@ namespace Robot.Handler
             this.coordinateRepository = coordinateRepository;
         }
 
-        public async Task<string> Execute(Coordinate coordinate, PositionSetting setting)
+        public async Task<string> ExecuteAsync(Coordinate coordinate, PositionSetting setting)
         {
             var X = coordinate.X;
             var Y = coordinate.Y;

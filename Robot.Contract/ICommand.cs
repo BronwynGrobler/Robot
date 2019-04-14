@@ -6,6 +6,6 @@ namespace Robot.Contract
 {
     public interface ICommand
     {
-        Task<String> Execute(Coordinate coordinate, PositionSetting setting);
+        Task<String> ExecuteAsync(Coordinate coordinate, PositionSetting setting);
     }
 }

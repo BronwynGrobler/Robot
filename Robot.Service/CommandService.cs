@@ -30,7 +30,7 @@ namespace Robot.Service
                 return ("Please make a placement first.");
             }
             var settings = await this.settingRepository.Setting(coordinates.F);
-            return await command.Execute(coordinates, settings);
+            return await command.ExecuteAsync(coordinates, settings);
         }
 
         public async Task<string> Place(int X, int Y, EDirection F)

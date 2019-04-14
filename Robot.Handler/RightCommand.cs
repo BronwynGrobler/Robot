@@ -17,7 +17,7 @@ namespace Robot.Handler
             this.coordinateRepository = coordinateRepository;
         }
 
-        public async Task<string> Execute(Coordinate coordinate, PositionSetting setting)
+        public async Task<string> ExecuteAsync(Coordinate coordinate, PositionSetting setting)
         {
             await this.coordinateRepository.Add(new Coordinate() { X = coordinate.X, Y = coordinate.Y, F = setting.Right });
             return Log(nameof(RightCommand));
